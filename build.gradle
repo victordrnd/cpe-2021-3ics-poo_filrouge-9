@@ -1,0 +1,13 @@
+plugins {
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+
+
+javafx {
+    sdk = '/usr/share/openjfx'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+mainClassName = 'filRouge.checkersGameLauncher.Launcher'

@@ -11,51 +11,53 @@ public class PawnModel implements PieceModel {
 	
 	public PawnModel(Coord coord, PieceSquareColor pieceColor) {
 		super();
-		
-		// ToDo 
-		
+		this.coord = coord;
+		this.pieceColor = pieceColor;
 	}
 
 	@Override
 	public Coord getCoord() {
-		Coord ret = null;
-
-		// ToDo 
-		
-		return ret;
+		return coord;
 	}
 
 	@Override
 	public void move(Coord coord) {
-
-		// ToDo 
-		
+		Coord c = new Coord(coord.getColonne(), coord.getLigne());
+		this.coord = c;
 	}
 
 	@Override
 	public PieceSquareColor getPieceColor() {
-		PieceSquareColor ret = null;
-
-		// ToDo 
-		
-		return ret;
+		return pieceColor;
 	}
 
 	@Override
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToTake) {
 		boolean ret = false;
-
-		// ToDo 
-		
+		int factor;
+		if(this.pieceColor == PieceSquareColor.WHITE){
+			factor = -1;
+		}else{
+			factor = 1;
+		}
+		if(targetCoord.getLigne() - this.getCoord().getLigne() == factor*1 && targetCoord.getColonne() - this.getCoord().getColonne() == 1 && !isPieceToTake){
+			return true;
+		} 
+		if(targetCoord.getLigne() - this.getCoord().getLigne() == factor*2 && targetCoord.getColonne() - this.getCoord().getColonne() == 2 && isPieceToTake){
+			return true;
+		} 		
 		return ret;
 	}
 
 	@Override
 	public List<Coord> getCoordsOnItinerary(Coord targetCoord) {
-		
 		List<Coord> coordsOnItinerary = null;
-		
-		// ToDo
+		// // 1 tests en opti // 2 en pas opti -> 2 boucles (ligne/ colonne)
+		// if(targetCoord.getLigne() < this.getCoord().getLigne()){
+		// 	for(int i = this.getCoord().getLigne(); i < targetCoord.getLigne(); i--){
+		// 	}
+		// }
+
 		
 		return coordsOnItinerary;
 	}
