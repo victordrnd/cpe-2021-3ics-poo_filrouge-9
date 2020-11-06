@@ -49,7 +49,7 @@ public class PawnModel implements PieceModel {
 		// }
 		// }
 
-		
+
 		return coordsOnItinerary;
 	}
 

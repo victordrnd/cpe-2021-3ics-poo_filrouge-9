@@ -74,22 +74,22 @@ public class TestCherchersGameModel0 {
 //		// Test classe Model
 //		//////////////////////////////////
 //
-		System.out.println("\nTest classe Model");
-		BoardGame<Coord> model = new Model();
-		System.out.println("isPieceMoveable ('b',4) = " + model.isPieceMoveable(new Coord('b',4)));	// true
-		System.out.println("isPieceMoveable ('c',7) = " + model.isPieceMoveable(new Coord('c',7)));	// false, tour des blancs
+		// System.out.println("\nTest classe Model");
+		// BoardGame<Coord> model = new Model();
+		// System.out.println("isPieceMoveable ('b',4) = " + model.isPieceMoveable(new Coord('b',4)));	// true
+		// System.out.println("isPieceMoveable ('c',7) = " + model.isPieceMoveable(new Coord('c',7)));	// false, tour des blancs
 
-		System.out.println("isMovePieceOk ('b',4) -> ('c',5) = " + 
-				model.isMovePieceOk(new Coord('b',4), new Coord('c',5)));	// true
-		System.out.println("movePiece ('b',4) -> ('c',5) = move OK" );
-		model.movePiece(new Coord('b',4), new Coord('c',5));	// move OK
+		// System.out.println("isMovePieceOk ('b',4) -> ('c',5) = " + 
+		// 		model.isMovePieceOk(new Coord('b',4), new Coord('c',5)));	// true
+		// System.out.println("movePiece ('b',4) -> ('c',5) = move OK" );
+		// model.movePiece(new Coord('b',4), new Coord('c',5));	// move OK
 
-		System.out.println("\n");
-		System.out.println("isPieceMoveable ('c',7) = " + model.isPieceMoveable(new Coord('c',7)));	// true
-		System.out.println("isMovePieceOk ('c',7) -> ('c',6) = " + 
-				model.isMovePieceOk(new Coord('c',7), new Coord('c',6)));	// false
-		System.out.println("movePiece ('c',7) -> ('c',6) = move KO pas diagonale" );	
-		model.movePiece(new Coord('c',7), new Coord('c',6));	// move KO
+		// System.out.println("\n");
+		// System.out.println("isPieceMoveable ('c',7) = " + model.isPieceMoveable(new Coord('c',7)));	// true
+		// System.out.println("isMovePieceOk ('c',7) -> ('c',6) = " + 
+		// 		model.isMovePieceOk(new Coord('c',7), new Coord('c',6)));	// false
+		// System.out.println("movePiece ('c',7) -> ('c',6) = move KO pas diagonale" );	
+		// model.movePiece(new Coord('c',7), new Coord('c',6));	// move KO
 
 	}
 
