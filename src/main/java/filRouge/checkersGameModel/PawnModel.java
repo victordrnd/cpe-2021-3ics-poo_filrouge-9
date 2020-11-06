@@ -5,10 +5,10 @@ import java.util.List;
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 
 public class PawnModel implements PieceModel {
-	
+
 	private Coord coord;
 	private PieceSquareColor pieceColor;
-	
+
 	public PawnModel(Coord coord, PieceSquareColor pieceColor) {
 		super();
 		this.coord = coord;
@@ -33,20 +33,11 @@ public class PawnModel implements PieceModel {
 
 	@Override
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToTake) {
-		boolean ret = false;
-		int factor;
-		if(this.pieceColor == PieceSquareColor.WHITE){
-			factor = -1;
-		}else{
-			factor = 1;
+		int isPieceToTakeInt = isPieceToTake ? 2 : 1;
+		if (Math.abs(targetCoord.getLigne() - this.getCoord().getLigne()) == isPieceToTakeInt && Math.abs(targetCoord.getColonne() - this.getCoord().getColonne()) == isPieceToTakeInt) {
+			return true;
 		}
-		if(targetCoord.getLigne() - this.getCoord().getLigne() == factor*1 && targetCoord.getColonne() - this.getCoord().getColonne() == 1 && !isPieceToTake){
-			return true;
-		} 
-		if(targetCoord.getLigne() - this.getCoord().getLigne() == factor*2 && targetCoord.getColonne() - this.getCoord().getColonne() == 2 && isPieceToTake){
-			return true;
-		} 		
-		return ret;
+		return false;
 	}
 
 	@Override
@@ -54,23 +45,22 @@ public class PawnModel implements PieceModel {
 		List<Coord> coordsOnItinerary = null;
 		// // 1 tests en opti // 2 en pas opti -> 2 boucles (ligne/ colonne)
 		// if(targetCoord.getLigne() < this.getCoord().getLigne()){
-		// 	for(int i = this.getCoord().getLigne(); i < targetCoord.getLigne(); i--){
-		// 	}
+		// for(int i = this.getCoord().getLigne(); i < targetCoord.getLigne(); i--){
+		// }
 		// }
 
 		
 		return coordsOnItinerary;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return " ["+pieceColor.toString().charAt(0) + coord + "]";
+		return " [" + pieceColor.toString().charAt(0) + coord + "]";
 	}
 
-	
 }
-

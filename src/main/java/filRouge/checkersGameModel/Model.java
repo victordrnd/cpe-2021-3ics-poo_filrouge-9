@@ -7,24 +7,24 @@ import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 /**
  * @author francoise.perrin
  *
- * Cette classe gère les aspects métiers du jeu de dame
- * indépendement de toute vue
+ * Cette classe gï¿½re les aspects mï¿½tiers du jeu de dame
+ * indï¿½pendement de toute vue
  * 
- * Elle délègue à son objet ModelImplementor 
+ * Elle dï¿½lï¿½gue ï¿½ son objet ModelImplementor 
  * le stockage des PieceModel dans une collection
  * 
- * Les pièces sont capables de se déplacer d'une case en diagonale 
+ * Les piï¿½ces sont capables de se dï¿½placer d'une case en diagonale 
  * si la case de destination est vide
- * ou de 2 cases en diagonale s'il existe une pièce
- * du jeu opposé à  prendre sur le trajet
+ * ou de 2 cases en diagonale s'il existe une piï¿½ce
+ * du jeu opposï¿½ ï¿½ prendre sur le trajet
  * 
  * 
  */
 public class Model implements BoardGame<Coord> {
 
-	private ModelImplementor implementor;	// objet qui gère la collection de PiecedModel
+	private ModelImplementor implementor;	// objet qui gï¿½re la collection de PiecedModel
 	private PieceSquareColor currentColor;	// couleur du joueur courant
-	private boolean isPieceToMove;			// pièce à  déplacer
+	private boolean isPieceToMove;			// piï¿½ce ï¿½ dï¿½placer
 
 	public Model() {
 		super();
@@ -35,35 +35,28 @@ public class Model implements BoardGame<Coord> {
 
 	/**
 	 * @param coord
-	 * @return true si la PieceModel qui se trouve aux coordonnées indiquées 
+	 * @return true si la PieceModel qui se trouve aux coordonnï¿½es indiquï¿½es 
 	 * est de la couleur du joueur courant 
 	 */
 	@Override
 	public boolean isPieceMoveable(Coord coord) {
-		boolean bool  = false;
-		
-		// ToDo
-		
-		return bool ;
+		//System.out.println(currentColor);
+		//System.out.println(this.implementor.findPiece(coord).getPieceColor());
+		return this.implementor.findPiece(coord).getPieceColor().equals(currentColor);
 	}
 
 	/**
 	 * @param initCoord
 	 * @param targetCoord
-	 * @return true si le déplacement est légal
+	 * @return true si le dï¿½placement est lï¿½gal
 	 * (s'effectue en diagonale, POUR L'INSTANT sans prise)
-	 * La PieceModel qui se trouve aux coordonnées passées en paramètre 
-	 * est capable de répondre à  cette question (par l'intermédiare du ModelImplementor)
+	 * La PieceModel qui se trouve aux coordonnï¿½es passï¿½es en paramï¿½tre 
+	 * est capable de rï¿½pondre ï¿½ cette question (par l'intermï¿½diare du ModelImplementor)
 	 * 
 	 */
 	@Override
 	public boolean isMovePieceOk(Coord initCoord, Coord targetCoord) {
-
-		boolean isMoveOk = false;
-		
-		// ToDo
-		
-		return isMoveOk;
+		return this.implementor.isMovePieceOk(initCoord, targetCoord, false);
 	}
 
 
@@ -74,12 +67,14 @@ public class Model implements BoardGame<Coord> {
 	 */
 	@Override
 	public Coord movePiece(Coord initCoord, Coord targetCoord) {
-
-		Coord tookPieceCoord = null;
-
-		// ToDo
-		
-		return  tookPieceCoord;
+		if(this.implementor.movePiece(initCoord, targetCoord)) {
+			if(this.currentColor == PieceSquareColor.WHITE)
+				this.currentColor = PieceSquareColor.BLACK;
+			else
+				this.currentColor = PieceSquareColor.WHITE;
+			return targetCoord;
+		} 
+		return initCoord;
 	}
 
 	@Override
