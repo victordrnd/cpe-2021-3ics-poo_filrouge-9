@@ -7,14 +7,14 @@ import filRouge.checkersGameModel.ModelConfig;
 /**
  * @author francoiseperrin
  *
- * Méthodes du controller sont invoquées par écouteurs du damier
- * Elles interrogent le Model pour savoir si les déplacements sont légaux
- * Elles permettent également de transformer les coordonnées des pièces :
- * 	- index de 0 à  99 pour la view
+ * Mthodes du controller sont invoques par couteurs du damier
+ * Elles interrogent le Model pour savoir si les dplacements sont lgaux
+ * Elles permettent galement de transformer les coordonnes des pices :
+ * 	- index de 0  99 pour la view
  * 	- Coord (col, ligne) pour le model ['a'..'j'][10..1]
  * 
- * On peut dire que le controller se substitue au model vis à vis de la view
- * car la view et le model ne gèrent pas les coordonnées des pièces de la même façon
+ * On peut dire que le controller se substitue au model vis  vis de la view
+ * car la view et le model ne grent pas les coordonnes des pices de la mme faon
  */
 public class Controller implements BoardGame<Integer> {
 
@@ -30,8 +30,8 @@ public class Controller implements BoardGame<Integer> {
 
 	/**
 	 * @param initSquareIndex
-	 * @return true si la PieceGUI sélectionnée correspond à  une PieceModel qui peut àªtre déplacée 
-	 * La coordonnée d'origine du déplacement est alors conservée
+	 * @return true si la PieceGUI slectionne correspond  une PieceModel qui peut tre dplace 
+	 * La coordonne d'origine du dplacement est alors conserve
 	 */
 	public boolean isPieceMoveable(Integer initSquareIndex) {
 		boolean bool  = false;
@@ -43,8 +43,8 @@ public class Controller implements BoardGame<Integer> {
 	/**
 	 * @param targetSquareIndex 
 	 * @param squareIndex
-	 * @return true si la case de destination peut recevoir la pièce sélectionnée 
-	 * c'est à  dire si le déplacement est légal du point de vue du model
+	 * @return true si la case de destination peut recevoir la pice slectionne 
+	 * c'est  dire si le dplacement est legal du point de vue du model
 	 */
 	public boolean isMovePieceOk(Integer initSquareIndex, Integer targetSquareIndex) {
 		boolean bool  = false;
@@ -60,8 +60,8 @@ public class Controller implements BoardGame<Integer> {
 	/**
 	 * @param targetSquareIndex 
 	 * @param squareIndex
-	 * @return index de l'éventuelle pièce à  capturer, -1 sinon
-	 * invite le model à  effectuer le déplacement métier
+	 * @return index de l'ventuelle pice  capturer, -1 sinon
+	 * invite le model  effectuer le dplacement metier
 	 */
 	public Integer movePiece(Integer initSquareIndex, Integer targetSquareIndex) {
 		int tookPieceIndex = -1;
@@ -70,7 +70,7 @@ public class Controller implements BoardGame<Integer> {
 		Coord targetCoord = this.transformIndexToCoord(targetSquareIndex);
 		tookPieceCoord  = this.model.movePiece(initCoord, targetCoord);
 
-		// les coord de la pièce capturée sont retournée à  la vue pour l'effacer
+		// les coord de la pice capture sont retourne  la vue pour l'effacer
 		if (tookPieceCoord != null) {
 			tookPieceIndex = transformCoordToIndex(tookPieceCoord);
 		}
@@ -80,7 +80,7 @@ public class Controller implements BoardGame<Integer> {
 	/**
 	 * @param squareIndex
 	 * @param length
-	 * @return les coordonnées métier calculées à  partir de l'index du SquareGUI de la PieceGUI
+	 * @return les coordonnes mtier calcules  partir de l'index du SquareGUI de la PieceGUI
 	 */
 	private Coord transformIndexToCoord (int squareIndex) {
 		Coord coord = null;

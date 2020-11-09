@@ -3,7 +3,7 @@ package filRouge.checkersGameModel;
 /**
  * @author francoiseperrin
  *
- *         Coordonn�es des PieceModel
+ *         Coordonn es des PieceModel
  */
 public class Coord implements Comparable<Coord>{
 

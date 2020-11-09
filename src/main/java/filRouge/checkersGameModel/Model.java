@@ -7,24 +7,23 @@ import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 /**
  * @author francoise.perrin
  *
- * Cette classe g�re les aspects m�tiers du jeu de dame
- * ind�pendement de toute vue
+ *         Cette classe g re les aspects m tiers du jeu de dame ind pendement de
+ *         toute vue
  * 
- * Elle d�l�gue � son objet ModelImplementor 
- * le stockage des PieceModel dans une collection
+ *         Elle d l gue son objet ModelImplementor le stockage des PieceModel
+ *         dans une collection
  * 
- * Les pi�ces sont capables de se d�placer d'une case en diagonale 
- * si la case de destination est vide
- * ou de 2 cases en diagonale s'il existe une pi�ce
- * du jeu oppos� � prendre sur le trajet
+ *         Les pi ces sont capables de se d placer d'une case en diagonale si la
+ *         case de destination est vide ou de 2 cases en diagonale s'il existe
+ *         une pi ce du jeu oppos prendre sur le trajet
  * 
  * 
  */
 public class Model implements BoardGame<Coord> {
 
-	private ModelImplementor implementor;	// objet qui g�re la collection de PiecedModel
-	private PieceSquareColor currentColor;	// couleur du joueur courant
-	private boolean isPieceToMove;			// pi�ce � d�placer
+	private ModelImplementor implementor; // objet qui g re la collection de PiecedModel
+	private PieceSquareColor currentColor; // couleur du joueur courant
+	private boolean isPieceToMove; // pi ce d placer
 
 	public Model() {
 		super();
@@ -35,23 +34,22 @@ public class Model implements BoardGame<Coord> {
 
 	/**
 	 * @param coord
-	 * @return true si la PieceModel qui se trouve aux coordonn�es indiqu�es 
-	 * est de la couleur du joueur courant 
+	 * @return true si la PieceModel qui se trouve aux coordonn es indiqu es est de
+	 *         la couleur du joueur courant
 	 */
 	@Override
 	public boolean isPieceMoveable(Coord coord) {
-		//System.out.println(currentColor);
-		//System.out.println(this.implementor.findPiece(coord).getPieceColor());
-		return this.implementor.findPiece(coord).getPieceColor().equals(currentColor);
+		// System.out.println(currentColor);
+		return this.implementor.getPieceColor(coord).equals(currentColor);
 	}
 
 	/**
 	 * @param initCoord
 	 * @param targetCoord
-	 * @return true si le d�placement est l�gal
-	 * (s'effectue en diagonale, POUR L'INSTANT sans prise)
-	 * La PieceModel qui se trouve aux coordonn�es pass�es en param�tre 
-	 * est capable de r�pondre � cette question (par l'interm�diare du ModelImplementor)
+	 * @return true si le d placement est l gal (s'effectue en diagonale, POUR
+	 *         L'INSTANT sans prise) La PieceModel qui se trouve aux coordonn es
+	 *         pass es en param tre est capable de r pondre cette question (par
+	 *         l'interm diare du ModelImplementor)
 	 * 
 	 */
 	@Override
@@ -59,21 +57,18 @@ public class Model implements BoardGame<Coord> {
 		return this.implementor.isMovePieceOk(initCoord, targetCoord, false);
 	}
 
-
 	/**
 	 * @param initCoord
 	 * @param targetCoord
-	 * @return null car POUR L'INSTANT, test sans prise 
+	 * @return null car POUR L'INSTANT, test sans prise
 	 */
 	@Override
 	public Coord movePiece(Coord initCoord, Coord targetCoord) {
-		if(this.implementor.movePiece(initCoord, targetCoord)) {
-			if(this.currentColor == PieceSquareColor.WHITE)
-				this.currentColor = PieceSquareColor.BLACK;
-			else
-				this.currentColor = PieceSquareColor.WHITE;
+		if (this.implementor.movePiece(initCoord, targetCoord)) {
+			this.currentColor = currentColor == PieceSquareColor.WHITE ? PieceSquareColor.BLACK
+					: PieceSquareColor.WHITE;
 			return targetCoord;
-		} 
+		}
 		return initCoord;
 	}
 
@@ -81,6 +76,5 @@ public class Model implements BoardGame<Coord> {
 	public String toString() {
 		return implementor.toString();
 	}
-
 
 }

@@ -7,7 +7,7 @@ import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 /**
  * @author francoiseperrin
  *
- *le mode de déplacement et de prise de la reine est différent de celui du pion
+ *le mode de dplacement et de prise de la reine est diffrent de celui du pion
  *
  */
 public class QueenModel implements PieceModel {

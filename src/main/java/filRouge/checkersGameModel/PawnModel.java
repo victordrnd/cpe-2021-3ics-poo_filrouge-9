@@ -34,9 +34,8 @@ public class PawnModel implements PieceModel {
 	@Override
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToTake) {
 		int isPieceToTakeInt = isPieceToTake ? 2 : 1;
-		if (Math.abs(targetCoord.getLigne() - this.getCoord().getLigne()) == isPieceToTakeInt && Math.abs(targetCoord.getColonne() - this.getCoord().getColonne()) == isPieceToTakeInt) {
+		if (Math.abs(targetCoord.getLigne() - this.getCoord().getLigne()) == isPieceToTakeInt && Math.abs(targetCoord.getColonne() - this.getCoord().getColonne()) == isPieceToTakeInt)
 			return true;
-		}
 		return false;
 	}
 
@@ -48,7 +47,6 @@ public class PawnModel implements PieceModel {
 		// for(int i = this.getCoord().getLigne(); i < targetCoord.getLigne(); i--){
 		// }
 		// }
-
 
 		return coordsOnItinerary;
 	}

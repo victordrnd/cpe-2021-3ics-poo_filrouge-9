@@ -14,7 +14,7 @@ public interface PieceModel {
 	
 	/**
 	 * @param coord the coord to set
-	 * le d�placement d'une pi�ce change ses coordonn�es
+	 * le d placement d'une pi ce change ses coordonn es
 	 */
 	public void move(Coord coord);
 
@@ -28,13 +28,13 @@ public interface PieceModel {
 	/**
 	 * @param targetCoord
 	 * @param isPieceToTake
-	 * @return true si le d�placement est l�gal
+	 * @return true si le d placement est l gal
 	 */
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToTake);
 	
 	/**
 	 * @param targetCoord
-	 * @return liste des coordonn�es des cases travers�es par itin�raire de d�placement
+	 * @return liste des coordonn es des cases travers es par itin raire de d placement
 	 */
 	public List<Coord> getCoordsOnItinerary(Coord targetCoord);
 	
