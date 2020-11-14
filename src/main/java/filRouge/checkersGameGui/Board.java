@@ -231,10 +231,10 @@ class Board extends GridPane {
 			//Check if piece selectedSquareIndex exists 
 			boolean pieceExists =(Integer)(selectedSquareIndex) != null;
 			if(pieceExists){
-				System.out.println(pieceExists);
 				if(Board.this.controller.isMovePieceOk(selectedSquareIndex, targetSquareIndex)){
 					// la PieceGui de la vue est effectivement d plac e et  ventuellement promue
 					// l' ventuelle pi ce interm diaire est supprim e dans la vue
+					Board.this.controller.movePiece(selectedSquareIndex, targetSquareIndex);
 					Board.this.movePieceOnGui(selectedSquareIndex, targetSquareIndex, tookPieceIndex);
 				}
 			}

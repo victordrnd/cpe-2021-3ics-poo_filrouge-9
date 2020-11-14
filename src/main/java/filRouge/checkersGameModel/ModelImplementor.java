@@ -3,6 +3,7 @@ package filRouge.checkersGameModel;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 
@@ -81,6 +82,13 @@ public class ModelImplementor {
 
 		return findPiece;
 	}
+
+	List<Coord> getCoordsOnItinerary(Coord initCoord, Coord targetCoord){
+		PieceModel piece = findPiece(initCoord);
+		return piece.getCoordsOnItinerary(targetCoord);
+	}
+
+	
 
 	/*
 	 * (non-Javadoc)

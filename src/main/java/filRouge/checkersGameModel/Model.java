@@ -40,7 +40,11 @@ public class Model implements BoardGame<Coord> {
 	@Override
 	public boolean isPieceMoveable(Coord coord) {
 		// System.out.println(currentColor);
-		return this.implementor.getPieceColor(coord).equals(currentColor);
+		PieceSquareColor color = this.implementor.getPieceColor(coord);
+		if(color != null){
+			return color.equals(currentColor);
+		}
+		return false;
 	}
 
 	/**
@@ -54,6 +58,8 @@ public class Model implements BoardGame<Coord> {
 	 */
 	@Override
 	public boolean isMovePieceOk(Coord initCoord, Coord targetCoord) {
+
+		
 		return this.implementor.isMovePieceOk(initCoord, targetCoord, false);
 	}
 
