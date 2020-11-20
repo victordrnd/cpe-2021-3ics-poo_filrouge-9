@@ -50,8 +50,7 @@ public class ModelImplementor {
 
 		boolean isMovePieceOk = false;
 
-		if (!initCoord.equals(targetCoord) && Coord.coordonnees_valides(initCoord)
-				&& Coord.coordonnees_valides(targetCoord)) {
+		if (!initCoord.equals(targetCoord) && Coord.coordonnees_valides(initCoord) && Coord.coordonnees_valides(targetCoord)) {
 			PieceModel piece = this.findPiece(initCoord);
 			return piece.isMoveOk(targetCoord, isPieceToTake);
 		}
@@ -70,7 +69,7 @@ public class ModelImplementor {
 
 	/**
 	 * @param coord
-	 * @return la pi ce qui se trouve aux coordonn es indiqu es
+	 * @return la piece qui se trouve aux coordonnees indiquees
 	 */
 	PieceModel findPiece(Coord coord) { // visibilit Package pour tre test dans TestCherchersGameModel
 

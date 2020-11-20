@@ -64,12 +64,11 @@ public class Controller implements BoardGame<Integer> {
 	 * invite le model  effectuer le dplacement metier
 	 */
 	public Integer movePiece(Integer initSquareIndex, Integer targetSquareIndex) {
-		int tookPieceIndex = -1;
+		Integer tookPieceIndex = null;
 		Coord tookPieceCoord = null ;
 		Coord initCoord = this.transformIndexToCoord(initSquareIndex);
 		Coord targetCoord = this.transformIndexToCoord(targetSquareIndex);
 		tookPieceCoord  = this.model.movePiece(initCoord, targetCoord);
-
 		// les coord de la pice capture sont retourne  la vue pour l'effacer
 		if (tookPieceCoord != null) {
 			tookPieceIndex = transformCoordToIndex(tookPieceCoord);

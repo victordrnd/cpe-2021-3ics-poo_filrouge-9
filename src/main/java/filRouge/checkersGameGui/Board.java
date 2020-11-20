@@ -137,11 +137,13 @@ class Board extends GridPane {
 	 * lorsqu'une case est cliqu e afin d'y d poser une pi ce pr c demment s lectionn e
 	 * la promouvoir  ventuellement en dame et supprimer l' ventuelle pi ce captur e
 	 */
-	private void movePieceOnGui(int selectedSquareIndex, int targetSquareIndex, int tookPieceIndex) {
+	private void movePieceOnGui(int selectedSquareIndex, int targetSquareIndex, Integer tookPieceIndex) {
 
 		// la PieceGui de la vue est effectivement d plac e
 		Board.this.movePiece(selectedSquareIndex, targetSquareIndex);
-		
+		if(tookPieceIndex != null){
+			Board.this.removePiece(tookPieceIndex);
+		}
 		// seul le d placement est g r  dans cette version
 	}
 
@@ -226,7 +228,7 @@ class Board extends GridPane {
 			int targetSquareIndex = Board.this.getChildren().indexOf(square);
 
 			// Pour l'instant, on ne supprime pas les pi ces pouvant se trouver sur le trajet 
-			int tookPieceIndex = 0;
+			Integer tookPieceIndex = null;
 			
 			//Check if piece selectedSquareIndex exists 
 			boolean pieceExists =(Integer)(selectedSquareIndex) != null;
@@ -234,7 +236,7 @@ class Board extends GridPane {
 				if(Board.this.controller.isMovePieceOk(selectedSquareIndex, targetSquareIndex)){
 					// la PieceGui de la vue est effectivement d plac e et  ventuellement promue
 					// l' ventuelle pi ce interm diaire est supprim e dans la vue
-					Board.this.controller.movePiece(selectedSquareIndex, targetSquareIndex);
+					tookPieceIndex = Board.this.controller.movePiece(selectedSquareIndex, targetSquareIndex);
 					Board.this.movePieceOnGui(selectedSquareIndex, targetSquareIndex, tookPieceIndex);
 				}
 			}

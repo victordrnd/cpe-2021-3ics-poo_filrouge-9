@@ -36,7 +36,8 @@ public class PawnModel implements PieceModel {
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToTake) {
 		int isPieceToTakeInt = isPieceToTake ? 2 : 1;
 		int factor = pieceColor.equals(PieceSquareColor.BLACK) ? -1 : 1;
-		if ((targetCoord.getLigne() - this.getCoord().getLigne()) * factor == isPieceToTakeInt && Math.abs(targetCoord.getColonne() - this.getCoord().getColonne()) == isPieceToTakeInt)
+		if ((targetCoord.getLigne() - this.getCoord().getLigne()) * factor == isPieceToTakeInt
+				&& Math.abs(targetCoord.getColonne() - this.getCoord().getColonne()) == isPieceToTakeInt)
 			return true;
 		return false;
 	}
@@ -44,21 +45,48 @@ public class PawnModel implements PieceModel {
 	@Override
 	public List<Coord> getCoordsOnItinerary(Coord targetCoord) {
 		List<Coord> coordsOnItinerary = new ArrayList<Coord>();
-		int sens = (this.getCoord().getColonne() - targetCoord.getColonne()) * -1; //Droite +1 - Gauche -1 
-		char colonne = this.coord.getColonne(); //colonne la plus petite 
-		for (int i = this.coord.getLigne() + 1; i < targetCoord.getLigne(); i++) {
-			if(this.getPieceColor() == PieceSquareColor.WHITE){
-				colonne += sens; 
+		// int hCount = (targetCoord.getColonne() - this.coord.getColonne()); // Droite
+		// +1 - Gauche -1
+		// // hCount *= pieceColor.equals(PieceSquareColor.WHITE) ? -1 : 1;
+		// int vCount = (targetCoord.getLigne() - this.coord.getLigne());
+		// // vCount *= pieceColor.equals(PieceSquareColor.WHITE) ? -1 : 1;
+		// boolean droite = hCount > 0;
+		// for (int i = this.coord.getLigne() + 1; i < Math.abs(vCount); i++) {
+		// Coord coord;
+		// int col_to_add = (i * hCount);
+		// char col = (char) (this.coord.getColonne() + (char) col_to_add);
+		// coord = new Coord(col, i);
+		// coordsOnItinerary.add(coord);
+		// }
+		// int factor = pieceColor.equals(PieceSquareColor.WHITE) ? 1 : -1;
+		if (Math.abs(this.coord.getLigne() - targetCoord.getLigne()) > 1) {
+			Coord coord;
+			System.out.println("executed");
+			if (pieceColor.equals(PieceSquareColor.WHITE)) {
+				boolean droite = this.coord.getColonne() < targetCoord.getColonne();
+				if (droite) {
+					System.out.println("droite + white");
+					coord = new Coord((char) (this.getCoord().getColonne() + 1), this.getCoord().getLigne() + 1);
+				} else {
+					System.out.println("gauche + white");
+					coord = new Coord((char) (this.getCoord().getColonne() - 1), this.getCoord().getLigne() + 1);
+				}
+			} else {
+				boolean droite = this.coord.getColonne() > targetCoord.getColonne();
+				if (droite) {
+					System.out.println("droite + black");
+					coord = new Coord((char) (this.getCoord().getColonne() - 1), this.getCoord().getLigne() - 1 );
+				} else {
+					System.out.println("gauche + black");
+					coord = new Coord((char) (this.getCoord().getColonne() + 1), this.getCoord().getLigne() - 1);
+				}
 			}
-			else {
-				colonne -= sens;
-			}
-			Coord c = new Coord(colonne, i);
-			coordsOnItinerary.add(c); 
-			}
+			System.out.println(coord);
+			coordsOnItinerary.add(coord);
+		}
+
 		return coordsOnItinerary;
 	}
-
 
 	/*
 	 * (non-Javadoc)

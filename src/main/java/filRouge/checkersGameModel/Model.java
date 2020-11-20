@@ -1,6 +1,7 @@
 package filRouge.checkersGameModel;
 
 import java.util.Collection;
+import java.util.List;
 
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 
@@ -59,8 +60,14 @@ public class Model implements BoardGame<Coord> {
 	@Override
 	public boolean isMovePieceOk(Coord initCoord, Coord targetCoord) {
 
-		
-		return this.implementor.isMovePieceOk(initCoord, targetCoord, false);
+		List<Coord> CoordsOnItinerary= this.implementor.getCoordsOnItinerary(initCoord,targetCoord);
+		for (Coord coord : CoordsOnItinerary) {
+			PieceModel piece = this.implementor.findPiece(coord);
+			if(piece.getPieceColor().equals(currentColor)){
+				return false;
+			}
+		}
+		return this.implementor.isMovePieceOk(initCoord, targetCoord, CoordsOnItinerary.size() == 1);
 	}
 
 	/**
@@ -70,12 +77,19 @@ public class Model implements BoardGame<Coord> {
 	 */
 	@Override
 	public Coord movePiece(Coord initCoord, Coord targetCoord) {
-		if (this.implementor.movePiece(initCoord, targetCoord)) {
-			this.currentColor = currentColor == PieceSquareColor.WHITE ? PieceSquareColor.BLACK
-					: PieceSquareColor.WHITE;
-			return targetCoord;
+		List<Coord> coordsOnItenary = this.implementor.getCoordsOnItinerary(initCoord, targetCoord);
+		this.currentColor = currentColor == PieceSquareColor.WHITE ? PieceSquareColor.BLACK
+				: PieceSquareColor.WHITE;
+		for(Coord coord : coordsOnItenary){
+			PieceModel piece = this.implementor.findPiece(coord);
+			piece = null;
+			return coord;
 		}
-		return initCoord;
+		if (this.implementor.movePiece(initCoord, targetCoord)) {
+
+			return null;
+		}
+		return null;
 	}
 
 	@Override
