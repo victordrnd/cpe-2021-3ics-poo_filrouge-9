@@ -62,6 +62,7 @@ public class ModelImplementor {
 		if (!this.isPiecehere(targetCoord)) {
 			PieceModel piece = this.findPiece(initCoord);
 			piece.move(targetCoord);
+			System.out.println(this.toString());
 			return true;
 		}
 		return false;
@@ -87,6 +88,9 @@ public class ModelImplementor {
 		return piece.getCoordsOnItinerary(targetCoord);
 	}
 
+	boolean removePiece(PieceModel piece){
+		return pieces.remove(piece);
+	}
 	
 
 	/*
@@ -107,15 +111,15 @@ public class ModelImplementor {
 		//
 		//
 		// de pi ces
-		// for(PieceModel piece : this.pieces) {
-		//
-		// PieceSquareColor color = piece.getPieceColor();
-		// String stColor = (PieceSquareColor.WHITE.equals(color) ? "--B--" : "--N--" );
-		//
-		// int col = piece.getCoord().getColonne()-'a';
-		// int lig = piece.getCoord().getLigne() -1;
-		// damier[lig][col ] = stColor ;
-		// }
+		for(PieceModel piece : this.pieces) {
+		
+		PieceSquareColor color = piece.getPieceColor();
+		String stColor = (PieceSquareColor.WHITE.equals(color) ? "--B--" : "--N--" );
+		
+		int col = piece.getCoord().getColonne()-'a';
+		int lig = piece.getCoord().getLigne() -1;
+		damier[lig][col ] = stColor ;
+		}
 
 		// Affichage du tableau formatt
 		st = "     a      b      c      d      e      f      g      h      i      j\n";

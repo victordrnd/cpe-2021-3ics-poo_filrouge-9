@@ -61,27 +61,21 @@ public class PawnModel implements PieceModel {
 		// int factor = pieceColor.equals(PieceSquareColor.WHITE) ? 1 : -1;
 		if (Math.abs(this.coord.getLigne() - targetCoord.getLigne()) > 1) {
 			Coord coord;
-			System.out.println("executed");
 			if (pieceColor.equals(PieceSquareColor.WHITE)) {
 				boolean droite = this.coord.getColonne() < targetCoord.getColonne();
 				if (droite) {
-					System.out.println("droite + white");
 					coord = new Coord((char) (this.getCoord().getColonne() + 1), this.getCoord().getLigne() + 1);
 				} else {
-					System.out.println("gauche + white");
 					coord = new Coord((char) (this.getCoord().getColonne() - 1), this.getCoord().getLigne() + 1);
 				}
 			} else {
 				boolean droite = this.coord.getColonne() > targetCoord.getColonne();
 				if (droite) {
-					System.out.println("droite + black");
 					coord = new Coord((char) (this.getCoord().getColonne() - 1), this.getCoord().getLigne() - 1 );
 				} else {
-					System.out.println("gauche + black");
 					coord = new Coord((char) (this.getCoord().getColonne() + 1), this.getCoord().getLigne() - 1);
 				}
 			}
-			System.out.println(coord);
 			coordsOnItinerary.add(coord);
 		}
 

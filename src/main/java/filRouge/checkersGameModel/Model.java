@@ -67,7 +67,8 @@ public class Model implements BoardGame<Coord> {
 				return false;
 			}
 		}
-		return this.implementor.isMovePieceOk(initCoord, targetCoord, CoordsOnItinerary.size() == 1);
+		//edit for reine
+		return this.implementor.isMovePieceOk(initCoord, targetCoord, CoordsOnItinerary.size() >= 1);
 	}
 
 	/**
@@ -77,19 +78,18 @@ public class Model implements BoardGame<Coord> {
 	 */
 	@Override
 	public Coord movePiece(Coord initCoord, Coord targetCoord) {
+		Coord coordToTake = null;
 		List<Coord> coordsOnItenary = this.implementor.getCoordsOnItinerary(initCoord, targetCoord);
-		this.currentColor = currentColor == PieceSquareColor.WHITE ? PieceSquareColor.BLACK
+		this.currentColor = (currentColor == PieceSquareColor.WHITE) ? PieceSquareColor.BLACK
 				: PieceSquareColor.WHITE;
 		for(Coord coord : coordsOnItenary){
 			PieceModel piece = this.implementor.findPiece(coord);
-			piece = null;
-			return coord;
+			this.implementor.removePiece(piece);
+			coordToTake =  coord;
 		}
-		if (this.implementor.movePiece(initCoord, targetCoord)) {
+		this.implementor.movePiece(initCoord, targetCoord);
 
-			return null;
-		}
-		return null;
+		return coordToTake;
 	}
 
 	@Override
