@@ -39,7 +39,10 @@ public class ModelImplementor {
 	}
 
 	public PieceSquareColor getPieceColor(Coord coord) {
-		return findPiece(coord) != null ? findPiece(coord).getPieceColor() : null;
+		if (isPiecehere(coord)) {
+			return findPiece(coord).getPieceColor();
+		}
+		return null;
 	}
 
 	public boolean isPiecehere(Coord coord) {
@@ -47,22 +50,14 @@ public class ModelImplementor {
 	}
 
 	public boolean isMovePieceOk(Coord initCoord, Coord targetCoord, boolean isPieceToTake) {
-
-		boolean isMovePieceOk = false;
-
-		if (!initCoord.equals(targetCoord) && Coord.coordonnees_valides(initCoord) && Coord.coordonnees_valides(targetCoord)) {
-			PieceModel piece = this.findPiece(initCoord);
-			return piece.isMoveOk(targetCoord, isPieceToTake);
-		}
-
-		return isMovePieceOk;
+		PieceModel piece = this.findPiece(initCoord);
+		return piece.isMoveOk(targetCoord, isPieceToTake);
 	}
 
 	public boolean movePiece(Coord initCoord, Coord targetCoord) {
 		if (!this.isPiecehere(targetCoord)) {
 			PieceModel piece = this.findPiece(initCoord);
 			piece.move(targetCoord);
-			System.out.println(this.toString());
 			return true;
 		}
 		return false;
@@ -79,19 +74,35 @@ public class ModelImplementor {
 			if (piece.getCoord().equals(coord))
 				findPiece = piece;
 		}
-
 		return findPiece;
 	}
 
-	List<Coord> getCoordsOnItinerary(Coord initCoord, Coord targetCoord){
+	List<Coord> getCoordsOnItinerary(Coord initCoord, Coord targetCoord) {
 		PieceModel piece = findPiece(initCoord);
 		return piece.getCoordsOnItinerary(targetCoord);
 	}
 
-	boolean removePiece(PieceModel piece){
+	boolean isPromotable(Coord coord) {
+		PieceModel piece = this.findPiece(coord);
+		if(piece instanceof PawnModel){
+			return ((Promotable)piece).isPromotable();
+		}
+		return false;
+	}
+
+	void promotePawn(Coord coord){
+		if(isPiecehere(coord)){
+			PieceModel piece = this.findPiece(coord);
+			QueenModel queen = new QueenModel(piece.getCoord(), piece.getPieceColor());
+			pieces.remove(piece);
+			pieces.add(queen);
+		}
+	}
+
+	boolean removePiece(Coord coord) {
+		PieceModel piece = this.findPiece(coord);
 		return pieces.remove(piece);
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -111,14 +122,14 @@ public class ModelImplementor {
 		//
 		//
 		// de pi ces
-		for(PieceModel piece : this.pieces) {
-		
-		PieceSquareColor color = piece.getPieceColor();
-		String stColor = (PieceSquareColor.WHITE.equals(color) ? "--B--" : "--N--" );
-		
-		int col = piece.getCoord().getColonne()-'a';
-		int lig = piece.getCoord().getLigne() -1;
-		damier[lig][col ] = stColor ;
+		for (PieceModel piece : this.pieces) {
+
+			PieceSquareColor color = piece.getPieceColor();
+			String stColor = (PieceSquareColor.WHITE.equals(color) ? "--B--" : "--N--");
+
+			int col = piece.getCoord().getColonne() - 'a';
+			int lig = piece.getCoord().getLigne() - 1;
+			damier[lig][col] = stColor;
 		}
 
 		// Affichage du tableau formatt

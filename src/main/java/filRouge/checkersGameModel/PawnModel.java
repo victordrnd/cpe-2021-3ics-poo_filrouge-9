@@ -2,7 +2,7 @@ package filRouge.checkersGameModel;
 
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 
-public class PawnModel extends PieceModelAbstract {
+public class PawnModel extends PieceModelAbstract implements Promotable {
 
 	public PawnModel(Coord coord, PieceSquareColor pieceColor) {
 		super(coord, pieceColor);
@@ -19,6 +19,16 @@ public class PawnModel extends PieceModelAbstract {
 		return false;
 	}
 
+	@Override
+	public boolean isPromotable() {
+		if (this.pieceColor.equals(PieceSquareColor.BLACK)){
+			return this.coord.getLigne() == 1;
+		}else{
+			return this.coord.getLigne() == 10;
+		}
+	}
+
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -28,5 +38,7 @@ public class PawnModel extends PieceModelAbstract {
 	public String toString() {
 		return " [Pion : " + pieceColor.toString().charAt(0) + coord + "]";
 	}
+
+	
 
 }

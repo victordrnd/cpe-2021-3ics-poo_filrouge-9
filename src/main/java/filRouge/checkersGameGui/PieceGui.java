@@ -17,7 +17,7 @@ public class PieceGui extends Canvas {
         this.setWidth(GuiConfig.HEIGHT / GuiConfig.SIZE);
 
         // la couleur est d finie en dur
-        Color color = Color.BLACK;
+        Color color = Color.rgb(40, 40, 40);
         if (pieceColor == PieceSquareColor.WHITE) {
             color = Color.WHITE;
         }
@@ -31,7 +31,8 @@ public class PieceGui extends Canvas {
         double height = rowHeight - offset;
         double upperLeftWidth = offset / 2;
         double upperLeftHeight = offset / 2;
-        graphicsContext.fillArc(upperLeftWidth, upperLeftHeight, width, height, 30, 300, ArcType.ROUND);
+        //graphicsContext.fillArc(upperLeftWidth, upperLeftHeight, width, height, 30, 300, ArcType.ROUND);
+        graphicsContext.fillRoundRect(upperLeftWidth, upperLeftHeight, width, height, 30, 300);
     }
 
 }

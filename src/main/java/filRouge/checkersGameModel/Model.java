@@ -41,9 +41,8 @@ public class Model implements BoardGame<Coord> {
 	@Override
 	public boolean isPieceMoveable(Coord coord) {
 		PieceSquareColor color = this.implementor.getPieceColor(coord);
-		if(color != null){
+		if (color != null)
 			return color.equals(currentColor);
-		}
 		return false;
 	}
 
@@ -58,24 +57,22 @@ public class Model implements BoardGame<Coord> {
 	 */
 	@Override
 	public boolean isMovePieceOk(Coord initCoord, Coord targetCoord) {
+		if (!initCoord.equals(targetCoord) && Coord.coordonnees_valides(initCoord)
+				&& Coord.coordonnees_valides(targetCoord)) {
 
-		List<Coord> CoordsOnItinerary= this.implementor.getCoordsOnItinerary(initCoord,targetCoord);
-		boolean is_queen = this.implementor.findPiece(initCoord).getClass() == QueenModel.class;
-		int count_piece_on_move = 0;
-		if(!is_queen && CoordsOnItinerary.size() > 1){
-			return false;
-		}
-		for (Coord coord : CoordsOnItinerary) {
-			PieceModel piece = this.implementor.findPiece(coord);
-			if(piece !=null){
-				count_piece_on_move++;
-				if(piece.getPieceColor().equals(currentColor) || count_piece_on_move > 1){
-					return false;
+			List<Coord> CoordsOnItinerary = this.implementor.getCoordsOnItinerary(initCoord, targetCoord);
+			int count_piece_on_move = 0;
+			for (Coord coord : CoordsOnItinerary) {
+				PieceSquareColor color = this.implementor.getPieceColor(coord);
+				if (color != null) {
+					if (color.equals(currentColor) || count_piece_on_move > 1)
+						return false;
 				}
+				count_piece_on_move++;
 			}
+			return this.implementor.isMovePieceOk(initCoord, targetCoord, count_piece_on_move == 1);
 		}
-		//edit for reine
-		return this.implementor.isMovePieceOk(initCoord, targetCoord, count_piece_on_move == 1);
+		return false;
 	}
 
 	/**
@@ -86,16 +83,20 @@ public class Model implements BoardGame<Coord> {
 	@Override
 	public Coord movePiece(Coord initCoord, Coord targetCoord) {
 		Coord coordToTake = null;
+		if (!this.isMovePieceOk(initCoord, targetCoord)) {
+			return coordToTake;
+		}
 		List<Coord> coordsOnItenary = this.implementor.getCoordsOnItinerary(initCoord, targetCoord);
-		this.currentColor = (currentColor == PieceSquareColor.WHITE) ? PieceSquareColor.BLACK
-				: PieceSquareColor.WHITE;
-		for(Coord coord : coordsOnItenary){
-			PieceModel piece = this.implementor.findPiece(coord);
-			this.implementor.removePiece(piece);
-			coordToTake =  coord;
+		this.currentColor = (currentColor == PieceSquareColor.WHITE) ? PieceSquareColor.BLACK : PieceSquareColor.WHITE;
+
+		for (Coord coord : coordsOnItenary) {
+			this.implementor.removePiece(coord);
+			coordToTake = coord;
 		}
 		this.implementor.movePiece(initCoord, targetCoord);
-
+		if(this.implementor.isPromotable(targetCoord)){
+			this.implementor.promotePawn(targetCoord);
+		}
 		return coordToTake;
 	}
 
