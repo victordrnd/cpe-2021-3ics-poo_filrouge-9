@@ -58,6 +58,7 @@ public class ModelImplementor {
 		if (!this.isPiecehere(targetCoord)) {
 			PieceModel piece = this.findPiece(initCoord);
 			piece.move(targetCoord);
+			this.toString();
 			return true;
 		}
 		return false;

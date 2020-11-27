@@ -27,7 +27,7 @@ public class Coord implements Comparable<Coord>{
 
 	public static boolean coordonnees_valides(Coord c) {
 
-		if ((c.getColonne() >= 'a' && c.getColonne() <= 'j') && (c.getLigne() < MAX && c.getLigne() >= 0)) {
+		if ((c.getColonne() >= 'a' && c.getColonne() <= 'j') && (c.getLigne() <= MAX && c.getLigne() >= 0)) {
 			return true;
 		}
 		return false;
