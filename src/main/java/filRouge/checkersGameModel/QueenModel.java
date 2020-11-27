@@ -1,6 +1,6 @@
+
 package filRouge.checkersGameModel;
 
-import java.util.List;
 
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 
@@ -10,68 +10,28 @@ import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
  *le mode de dplacement et de prise de la reine est diffrent de celui du pion
  *
  */
-public class QueenModel implements PieceModel {
+public class QueenModel extends PieceModelAbstract {
 	
-	private Coord coord;
-	private PieceSquareColor pieceColor;
+
 	
 	public QueenModel(Coord coord, PieceSquareColor pieceColor) {
-		super();
-		
-		// ToDo 
-		
-	}
-
-	@Override
-	public Coord getCoord() {
-		Coord ret = null;
-
-		// ToDo 
-		
-		return ret;
-	}
-
-	@Override
-	public void move(Coord coord) {
-
-		// ToDo 
-		
-	}
-
-	@Override
-	public PieceSquareColor getPieceColor() {
-		PieceSquareColor ret = null;
-
-		// ToDo 
-		
-		return ret;
+		super(coord, pieceColor);
 	}
 
 	@Override
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToTake) {
-		boolean ret = false;
-
-		// ToDo 
-		
-		return ret;
+		int vertical_offset = Math.abs(targetCoord.getLigne() - this.getCoord().getLigne());
+		int horizontal_offset = Math.abs(targetCoord.getColonne() - this.getCoord().getColonne());
+		return vertical_offset == horizontal_offset;
 	}
 
-	@Override
-	public List<Coord> getCoordsOnItinerary(Coord targetCoord) {
-		
-		List<Coord> coordsOnItinerary = null;
-		
-		// ToDo
-		
-		return coordsOnItinerary;
-	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return " ["+pieceColor.toString().charAt(0) + coord + "]";
+		return " [Reine : "+pieceColor.toString().charAt(0) + coord + "]";
 	}
 }
 

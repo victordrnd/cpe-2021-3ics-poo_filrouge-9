@@ -40,7 +40,6 @@ public class Model implements BoardGame<Coord> {
 	 */
 	@Override
 	public boolean isPieceMoveable(Coord coord) {
-		// System.out.println(currentColor);
 		PieceSquareColor color = this.implementor.getPieceColor(coord);
 		if(color != null){
 			return color.equals(currentColor);
@@ -61,14 +60,22 @@ public class Model implements BoardGame<Coord> {
 	public boolean isMovePieceOk(Coord initCoord, Coord targetCoord) {
 
 		List<Coord> CoordsOnItinerary= this.implementor.getCoordsOnItinerary(initCoord,targetCoord);
+		boolean is_queen = this.implementor.findPiece(initCoord).getClass() == QueenModel.class;
+		int count_piece_on_move = 0;
+		if(!is_queen && CoordsOnItinerary.size() > 1){
+			return false;
+		}
 		for (Coord coord : CoordsOnItinerary) {
 			PieceModel piece = this.implementor.findPiece(coord);
-			if(piece.getPieceColor().equals(currentColor)){
-				return false;
+			if(piece !=null){
+				count_piece_on_move++;
+				if(piece.getPieceColor().equals(currentColor) || count_piece_on_move > 1){
+					return false;
+				}
 			}
 		}
 		//edit for reine
-		return this.implementor.isMovePieceOk(initCoord, targetCoord, CoordsOnItinerary.size() >= 1);
+		return this.implementor.isMovePieceOk(initCoord, targetCoord, count_piece_on_move == 1);
 	}
 
 	/**
