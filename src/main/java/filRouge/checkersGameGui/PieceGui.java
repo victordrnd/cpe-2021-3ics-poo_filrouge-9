@@ -38,10 +38,10 @@ public class PieceGui extends Canvas {
 
     }
 
-    void promoteToQueen() {
-        GraphicsContext graphicsContext = this.getGraphicsContext2D();
-        double rowWidth = this.getWidth();
-        double rowHeight = this.getHeight();
+    static void promoteToQueen(Canvas cs) {
+        GraphicsContext graphicsContext = cs.getGraphicsContext2D();
+        double rowWidth = cs.getWidth();
+        double rowHeight = cs.getHeight();
         int offset = (int) ((rowWidth + rowHeight) / 6);
         double width = rowWidth - offset;
         double height = rowHeight - offset;

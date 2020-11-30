@@ -22,7 +22,7 @@ public class GuiFactory {
 		return new PieceGui(pieceColor);
 	}
 
-	public static void promoteToQueen(PieceGui piece_gui){
-		piece_gui.promoteToQueen();
+	public static void promoteToQueen(Canvas piece_gui){
+		PieceGui.promoteToQueen(piece_gui);
 	}
 }

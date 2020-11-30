@@ -14,7 +14,10 @@ public class PawnModel extends PieceModelAbstract implements Promotable {
 	@Override
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToTake) {
 		int isPieceToTakeInt = isPieceToTake ? 2 : 1;
-		int factor = pieceColor.equals(PieceSquareColor.BLACK) ? -1 : 1;
+		int factor =1;
+		if(!isPieceToTake){
+			factor = pieceColor.equals(PieceSquareColor.BLACK) ? -1 : 1;
+		}
 		int vertical_offset = (targetCoord.getLigne() - this.getCoord().getLigne());
 		int horizontal_offset = Math.abs(targetCoord.getColonne() - this.getCoord().getColonne());
 		if ((vertical_offset * factor == isPieceToTakeInt) && (horizontal_offset == isPieceToTakeInt) && Math.abs(vertical_offset) == horizontal_offset)
