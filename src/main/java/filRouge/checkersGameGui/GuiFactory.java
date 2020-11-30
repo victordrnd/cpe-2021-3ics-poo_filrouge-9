@@ -21,4 +21,8 @@ public class GuiFactory {
 	public static Canvas createPiece(PieceSquareColor pieceColor) {
 		return new PieceGui(pieceColor);
 	}
+
+	public static void promoteToQueen(PieceGui piece_gui){
+		piece_gui.promoteToQueen();
+	}
 }

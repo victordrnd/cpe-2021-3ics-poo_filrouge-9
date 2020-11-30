@@ -65,10 +65,10 @@ public class Model implements BoardGame<Coord> {
 			for (Coord coord : CoordsOnItinerary) {
 				PieceSquareColor color = this.implementor.getPieceColor(coord);
 				if (color != null) {
+					count_piece_on_move++;
 					if (color.equals(currentColor) || count_piece_on_move > 1)
 						return false;
 				}
-				count_piece_on_move++;
 			}
 			return this.implementor.isMovePieceOk(initCoord, targetCoord, count_piece_on_move == 1);
 		}
@@ -95,7 +95,7 @@ public class Model implements BoardGame<Coord> {
 		}
 		this.implementor.movePiece(initCoord, targetCoord);
 		if(this.implementor.isPromotable(targetCoord)){
-			this.implementor.promotePawn(targetCoord);
+			this.implementor.promoteToQueen(targetCoord);
 		}
 		return coordToTake;
 	}

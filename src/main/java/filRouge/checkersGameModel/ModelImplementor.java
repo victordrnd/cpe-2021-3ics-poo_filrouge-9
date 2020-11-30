@@ -91,11 +91,12 @@ public class ModelImplementor {
 		return false;
 	}
 
-	void promotePawn(Coord coord){
+	void promoteToQueen(Coord coord){
 		if(isPiecehere(coord)){
 			PieceModel piece = this.findPiece(coord);
 			QueenModel queen = new QueenModel(piece.getCoord(), piece.getPieceColor());
 			pieces.remove(piece);
+			System.out.println("Promote to queen");
 			pieces.add(queen);
 		}
 	}

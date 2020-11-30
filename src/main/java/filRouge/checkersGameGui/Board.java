@@ -155,7 +155,6 @@ class Board extends GridPane {
 	 *   travers movePieceOnGui()
 	 */
 	private void movePiece (int selectedSquareIndex, int targetSquareIndex) {
-
 		Node selectedPiece = null;
 		Pane selectedPieceSquare = (Pane) Board.this.getChildren().get(selectedSquareIndex);
 		Pane targetSquare = (Pane) Board.this.getChildren().get(targetSquareIndex);
@@ -237,6 +236,9 @@ class Board extends GridPane {
 					// la PieceGui de la vue est effectivement d plac e et  ventuellement promue
 					// l' ventuelle pi ce interm diaire est supprim e dans la vue
 					tookPieceIndex = Board.this.controller.movePiece(selectedSquareIndex, targetSquareIndex);
+					if(tookPieceIndex < 10 || tookPieceIndex > 90){
+						
+					}
 					Board.this.movePieceOnGui(selectedSquareIndex, targetSquareIndex, tookPieceIndex);
 				}
 			}
