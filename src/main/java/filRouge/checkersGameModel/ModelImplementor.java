@@ -58,7 +58,7 @@ public class ModelImplementor {
 		if (!this.isPiecehere(targetCoord)) {
 			PieceModel piece = this.findPiece(initCoord);
 			piece.move(targetCoord);
-			this.toString();
+			System.out.println(this.toString());
 			return true;
 		}
 		return false;
@@ -68,7 +68,7 @@ public class ModelImplementor {
 	 * @param coord
 	 * @return la piece qui se trouve aux coordonnees indiquees
 	 */
-	PieceModel findPiece(Coord coord) { // visibilit Package pour tre test dans TestCherchersGameModel
+	private PieceModel findPiece(Coord coord) { // visibilit Package pour tre test dans TestCherchersGameModel
 
 		PieceModel findPiece = null;
 		for (PieceModel piece : pieces) {
@@ -102,8 +102,11 @@ public class ModelImplementor {
 	}
 
 	boolean removePiece(Coord coord) {
-		PieceModel piece = this.findPiece(coord);
-		return pieces.remove(piece);
+		if(isPiecehere(coord)){
+			PieceModel piece = this.findPiece(coord);
+			return pieces.remove(piece);
+		}
+		return false;
 	}
 
 	/*

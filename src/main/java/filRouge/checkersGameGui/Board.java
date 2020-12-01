@@ -235,11 +235,9 @@ class Board extends GridPane {
 					// l' ventuelle pi ce interm diaire est supprim e dans la vue
 					tookPieceIndex = Board.this.controller.movePiece(selectedSquareIndex, targetSquareIndex);
 					Board.this.movePieceOnGui(selectedSquareIndex, targetSquareIndex, tookPieceIndex);
-					System.out.println("target : " + targetSquareIndex);
 					if (targetSquareIndex < 10 || targetSquareIndex > 90) {
 						Pane targetSquare = (Pane) Board.this.getChildren().get(targetSquareIndex);
 						if (!targetSquare.getChildren().isEmpty()) {
-							System.out.println("Executéd ");
 							Canvas cs = (Canvas) targetSquare.getChildren().get(0);
 							GuiFactory.promoteToQueen(cs);
 						}

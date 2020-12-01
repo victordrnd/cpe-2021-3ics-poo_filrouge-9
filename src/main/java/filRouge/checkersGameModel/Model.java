@@ -90,8 +90,9 @@ public class Model implements BoardGame<Coord> {
 		this.currentColor = (currentColor == PieceSquareColor.WHITE) ? PieceSquareColor.BLACK : PieceSquareColor.WHITE;
 
 		for (Coord coord : coordsOnItenary) {
-			this.implementor.removePiece(coord);
-			coordToTake = coord;
+			if(this.implementor.removePiece(coord)){
+				coordToTake = coord;
+			}
 		}
 		this.implementor.movePiece(initCoord, targetCoord);
 		if(this.implementor.isPromotable(targetCoord)){

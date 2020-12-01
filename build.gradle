@@ -6,7 +6,8 @@ plugins {
 
 
 javafx {
-    sdk = './javafx' //sdk = '/usr/share/openjfx'
+    //sdk = './javafx'
+    sdk = '/usr/share/openjfx'
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
