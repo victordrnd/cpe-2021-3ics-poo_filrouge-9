@@ -1,7 +1,6 @@
 package filRouge.checkersGameModel;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 
@@ -34,7 +33,7 @@ public abstract class PieceModelAbstract implements PieceModel{
 		return pieceColor;
 	}
 
-
+    
 
     
 }

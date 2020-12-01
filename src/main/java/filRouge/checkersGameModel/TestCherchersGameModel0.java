@@ -1,6 +1,5 @@
 package filRouge.checkersGameModel;
 
-import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 
 /**
  * @author francoiseperrin

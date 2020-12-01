@@ -1,7 +1,6 @@
 package filRouge.checkersGameModel;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -96,7 +95,6 @@ public class ModelImplementor {
 			PieceModel piece = this.findPiece(coord);
 			QueenModel queen = new QueenModel(piece.getCoord(), piece.getPieceColor());
 			pieces.remove(piece);
-			System.out.println("Promote to queen");
 			pieces.add(queen);
 		}
 	}
@@ -123,6 +121,19 @@ public class ModelImplementor {
 		String st = "";
 		String[][] damier = new String[ModelConfig.LENGTH][ModelConfig.LENGTH];
 
+		// List<PieceModel> list = new ArrayList<PieceModel>();
+		// list.addAll(this.pieces);
+		// Collections.sort(list, Comparator.comparing(el->el.getCoord().getColonne()));
+		// ListIterator<PieceModel> iterator = list.listIterator();
+		// while(iterator.hasNext()){
+		// 	if(iterator.nextIndex() % 5 == 0){
+		// 		System.out.print("\n");
+		// 	}
+		// 	System.out.print(iterator.next());
+		// } 
+
+
+		
 		// // cr ation d'un tableau 2D avec les noms des pi ces partir de la liste
 		//
 		//
@@ -151,7 +162,7 @@ public class ModelImplementor {
 			}
 			st += "\n";
 		}
-		return "Damier du model \n" + st;
+		return st;
 	}
 
 }

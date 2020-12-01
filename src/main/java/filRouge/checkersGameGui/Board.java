@@ -238,7 +238,7 @@ class Board extends GridPane {
 					if (targetSquareIndex < 10 || targetSquareIndex > 90) {
 						Pane targetSquare = (Pane) Board.this.getChildren().get(targetSquareIndex);
 						if (!targetSquare.getChildren().isEmpty()) {
-							Canvas cs = (Canvas) targetSquare.getChildren().get(0);
+							PieceGui cs = (PieceGui) targetSquare.getChildren().get(0);
 							GuiFactory.promoteToQueen(cs);
 						}
 					}

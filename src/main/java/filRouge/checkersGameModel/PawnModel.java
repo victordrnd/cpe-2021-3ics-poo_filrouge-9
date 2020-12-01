@@ -1,6 +1,7 @@
 package filRouge.checkersGameModel;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
@@ -15,11 +16,13 @@ public class PawnModel extends PieceModelAbstract implements Promotable {
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToTake) {
 		int isPieceToTakeInt = isPieceToTake ? 2 : 1;
 		int factor =1;
-		//if(!isPieceToTake){
-			factor = pieceColor.equals(PieceSquareColor.BLACK) ? -1 : 1;
-		//}
 		int vertical_offset = (targetCoord.getLigne() - this.getCoord().getLigne());
 		int horizontal_offset = Math.abs(targetCoord.getColonne() - this.getCoord().getColonne());
+		if(!isPieceToTake){
+			factor = pieceColor.equals(PieceSquareColor.BLACK) ? -1 : 1;
+		}else{
+			vertical_offset = Math.abs(vertical_offset);
+		}
 		if ((vertical_offset * factor == isPieceToTakeInt) && (horizontal_offset == isPieceToTakeInt) && Math.abs(vertical_offset) == horizontal_offset)
 			return true;
 		return false;
@@ -38,16 +41,17 @@ public class PawnModel extends PieceModelAbstract implements Promotable {
 	@Override
 	public List<Coord> getCoordsOnItinerary(Coord targetCoord) {
 		List<Coord> coordsOnItinerary = new ArrayList<Coord>();
-		int factor = pieceColor.equals(PieceSquareColor.WHITE) ? 1 : -1;
 		int diagonal_move_count = Math.abs(this.coord.getLigne() - targetCoord.getLigne());
+		boolean go_down = this.coord.getLigne() - targetCoord.getLigne() > 0;
+		int factor = go_down ? -1 : 1;
 		if(diagonal_move_count > 1){
 			for(int i = 1; i < diagonal_move_count; i++){
 				Coord coord;
-				boolean droite = ((this.coord.getColonne() < targetCoord.getColonne()) ^ (pieceColor.equals(PieceSquareColor.BLACK)));
+				boolean droite = ((this.coord.getColonne() < targetCoord.getColonne()) ^ go_down);
 				if (droite) 
-					coord = new Coord((char) (this.getCoord().getColonne() + (factor*i)), this.getCoord().getLigne() + (factor*i));
+					coord = new Coord((char) (this.getCoord().getColonne() + (factor * i)), this.getCoord().getLigne() + (factor * i));
 				else 
-					coord = new Coord((char) (this.getCoord().getColonne() - (factor*i)), this.getCoord().getLigne() + (factor*i) );
+					coord = new Coord((char) (this.getCoord().getColonne() - (factor * i)), this.getCoord().getLigne() + (factor * i) );
 				coordsOnItinerary.add(coord);
 			}
 		}
@@ -61,8 +65,13 @@ public class PawnModel extends PieceModelAbstract implements Promotable {
 	 */
 	@Override
 	public String toString() {
-		return " [Pion : " + pieceColor.toString().charAt(0) + coord + "]";
+		return " [" + pieceColor.toString().charAt(0) + coord + "]";
 	}
+
+
+
+
+
 
 	
 

@@ -3,10 +3,7 @@ package filRouge.checkersGameGui;
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 
 public class PieceGui extends Canvas {
 
@@ -20,7 +17,7 @@ public class PieceGui extends Canvas {
         // la couleur est d finie en dur
         Color color = Color.rgb(40, 40, 40);
         if (pieceColor == PieceSquareColor.WHITE) {
-            color = Color.WHITE;
+            color = Color.rgb(245, 245, 245);
         }
         graphicsContext.setFill(color);
 
@@ -38,17 +35,17 @@ public class PieceGui extends Canvas {
 
     }
 
-    static void promoteToQueen(Canvas cs) {
-        GraphicsContext graphicsContext = cs.getGraphicsContext2D();
-        double rowWidth = cs.getWidth();
-        double rowHeight = cs.getHeight();
+    public void promoteToQueen(){
+        GraphicsContext graphicsContext = this.getGraphicsContext2D();
+        double rowWidth = this.getWidth();
+        double rowHeight = this.getHeight();
         int offset = (int) ((rowWidth + rowHeight) / 6);
         double width = rowWidth - offset;
         double height = rowHeight - offset;
-        graphicsContext.setStroke(Color.rgb(220, 20, 60).brighter());
+        graphicsContext.setStroke(Color.rgb(218, 165, 32));
         graphicsContext.setLineWidth(5);
         graphicsContext.strokeOval(width / 2 + 5, height / 2 + 5, 10, 10);
-        graphicsContext.setFill(Color.rgb(218, 165, 32));
+        graphicsContext.setFill(Color.rgb(255, 222, 173));
         graphicsContext.fillOval(width / 2 + 5, height / 2 + 5, 10, 10);
     }
 
