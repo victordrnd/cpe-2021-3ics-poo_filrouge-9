@@ -2,7 +2,7 @@ package filRouge.checkersGameGui;
 
 import filRouge.checkersGameModel.BoardGame;
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
-
+import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
@@ -36,8 +36,10 @@ class Board extends GridPane {
 		super();
 
 		this.nbCol = nbLig = GuiConfig.SIZE;
-		this.height = (double) GuiConfig.HEIGHT;
-
+		this.height = (double) View.heightObservable.get();
+		View.heightObservable.addListener((obs, old, newVal) -> {
+			this.height = (double) newVal;
+		});
 		this.controller = controller;
 
 		this.squareListener = new SquareListener();
@@ -70,9 +72,10 @@ class Board extends GridPane {
 				square.setOnMouseClicked(squareListener);
 
 				// gestion de la taille des Pane
-				square.setPrefHeight(this.height / this.nbLig); // TODO - remplacer : bad practice
-				square.setPrefWidth(this.height / this.nbCol); // TODO - remplacer : bad practice
-
+				//square.setPrefHeight(this.height / this.nbLig); // TODO - remplacer : bad practice
+				//square.setPrefWidth(this.height / this.nbCol); // TODO - remplacer : bad practice
+				square.prefHeightProperty().bind(Bindings.divide(View.heightObservable, this.nbLig));
+				square.prefWidthProperty().bind(Bindings.divide(View.heightObservable, this.nbCol));
 				// ajout du carre sur le damier
 				this.add(square, col, ligne);
 
@@ -121,9 +124,11 @@ class Board extends GridPane {
 		// si la pi ce est s lectionn e, elle sera supprim de son emplacement actuel
 		// et repositionn e sur une autre case
 		pieceGUI.setOnMouseClicked(this.pieceListener);
-
+		pieceGUI.heightProperty().bind(targetSquare.prefHeightProperty());
+		pieceGUI.widthProperty().bind(targetSquare.prefWidthProperty());
 		// Ajout de la pi ce sur le carr noir
 		targetSquare.getChildren().add(pieceGUI);
+
 
 	}
 

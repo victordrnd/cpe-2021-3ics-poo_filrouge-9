@@ -16,4 +16,6 @@ public class SquareGui extends Pane{
                 GuiConfig.CASEBLACK : GuiConfig.CASEWHITE;
         this.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
+
+
 }

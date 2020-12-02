@@ -100,21 +100,18 @@ public class Controller implements BoardGame<Integer> {
 
 //	@Override
 //	public boolean isPieceMoveable(Coord coord) {
-//		// TODO Auto-generated method stub
 //		return false;
 //	}
 //
 //
 //	@Override
 //	public boolean isMovePieceOk(Coord initCoord, Coord targetCoord) {
-//		// TODO Auto-generated method stub
 //		return false;
 //	}
 //
 //
 //	@Override
 //	public Coord movePiece(Coord initCoord, Coord targetCoord) {
-//		// TODO Auto-generated method stub
 //		return null;
 //	}
 

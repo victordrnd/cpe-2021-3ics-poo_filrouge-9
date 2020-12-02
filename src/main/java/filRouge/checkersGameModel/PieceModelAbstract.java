@@ -6,8 +6,8 @@ import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 
 
 public abstract class PieceModelAbstract implements PieceModel{
-    protected Coord coord;
-    protected PieceSquareColor pieceColor;
+    private Coord coord;
+    private PieceSquareColor pieceColor;
 
     public PieceModelAbstract(Coord coord, PieceSquareColor pieceColor){
         this.coord = coord;
@@ -27,12 +27,16 @@ public abstract class PieceModelAbstract implements PieceModel{
 		Coord c = new Coord(coord.getColonne(), coord.getLigne());
 		this.coord = c;
     }
+
+
+    public abstract boolean isMoveOk(Coord targetCoord, boolean isPieceToTake);
+
     
     @Override
 	public PieceSquareColor getPieceColor() {
 		return pieceColor;
-	}
-
+    }
+    
     
 
     
