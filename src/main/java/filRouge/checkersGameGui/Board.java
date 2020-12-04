@@ -240,20 +240,23 @@ class Board extends GridPane {
 					// l' ventuelle pi ce interm diaire est supprim e dans la vue
 					tookPieceIndex = Board.this.controller.movePiece(selectedSquareIndex, targetSquareIndex);
 					Board.this.movePieceOnGui(selectedSquareIndex, targetSquareIndex, tookPieceIndex);
-					if (targetSquareIndex < 10 || targetSquareIndex > 90) {
-						Pane targetSquare = (Pane) Board.this.getChildren().get(targetSquareIndex);
-						if (!targetSquare.getChildren().isEmpty()) {
-							PieceGui cs = (PieceGui) targetSquare.getChildren().get(0);
-							GuiFactory.promoteToQueen(cs);
-						}
-					}
+					checkIfPromoteNeeded(targetSquareIndex);
 				}
 			}
 
 			// On vite que le parent ne r cup re l'event
 			mouseEvent.consume();
 		}
-
+		
+		private void checkIfPromoteNeeded(int targetSquareIndex){
+			if (targetSquareIndex < 10 || targetSquareIndex > 90) {
+				Pane targetSquare = (Pane) Board.this.getChildren().get(targetSquareIndex);
+				if (!targetSquare.getChildren().isEmpty()) {
+					PieceGui cs = (PieceGui) targetSquare.getChildren().get(0);
+					GuiFactory.promoteToQueen(cs);
+				}
+			}
+		}
 	}
 
 	/**

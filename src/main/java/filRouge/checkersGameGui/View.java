@@ -1,7 +1,7 @@
 package filRouge.checkersGameGui;
 
 import javafx.scene.control.Label;
-
+import javafx.scene.control.MenuBar;
 import filRouge.checkersGameModel.BoardGame;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -64,10 +64,9 @@ public class View extends GridPane {
 		}
 		checkersBoard.setTop(xaxis);
 		checkersBoard.setLeft(yaxis);
-		// ajout du damier au centre du fond d' cran
 		checkersBoard.setCenter(board);
-		
-		// ajout du fond d' cran   la vue
+		MenuGui menuBar = GuiFactory.createMenuBar();
+		this.add(menuBar, 0, 0);
 		this.add(checkersBoard, 0, 1);
 	}
 

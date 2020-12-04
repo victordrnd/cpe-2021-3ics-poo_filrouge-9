@@ -1,21 +1,38 @@
 package filRouge.checkersGameGui;
 
-import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.Pane;
+import java.util.Map;
 
+import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
+import javafx.collections.FXCollections;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.Pane;
 
 public class GuiFactory {
 
-	public static Pane createSquare(PieceSquareColor squareColor) {
+	private static Map<Object, Object> gUIConfigMap = FXCollections.observableHashMap();
+	static {
+		GuiFactory.gUIConfigMap.put(PieceSquareColor.BLACK, GuiConfig.CASEBLACK);
+		GuiFactory.gUIConfigMap.put(PieceSquareColor.WHITE, GuiConfig.CASEWHITE);
+		GuiFactory.gUIConfigMap.put("Forme", GuiConfig.SHAPE);
+	}
+
+	public static Map<Object, Object> getGUIConfig() {
+		return GuiFactory.gUIConfigMap;
+	}
+
+	public static MenuGui createMenuBar(){
+		return new MenuGui();
+	}
+	public static SquareGui createSquare(PieceSquareColor squareColor) {
 		return new SquareGui(squareColor);
 	}
 
-	public static Canvas createPiece(PieceSquareColor pieceColor) {
+	public static PieceGui createPiece(PieceSquareColor pieceColor) {
 		return new PieceGui(pieceColor);
 	}
 
-	public static void promoteToQueen(PieceGui piece_gui){
+	public static void promoteToQueen(PieceGui piece_gui) {
 		piece_gui.promoteToQueen();
 	}
 }
