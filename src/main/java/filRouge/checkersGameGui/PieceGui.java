@@ -3,6 +3,7 @@ package filRouge.checkersGameGui;
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
+import javafx.collections.MapChangeListener;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -14,19 +15,19 @@ public class PieceGui extends Canvas {
         GraphicsContext graphicsContext = this.getGraphicsContext2D();
         this.setHeight(GuiConfig.HEIGHT / GuiConfig.SIZE);
         this.setWidth(GuiConfig.HEIGHT / GuiConfig.SIZE);
-        View.heightObservable.addListener(evt -> draw((DoubleProperty) evt));
+        View.heightObservable.addListener(evt -> draw());
+        GuiFactory.getGUIConfig().addListener((MapChangeListener<? super Object,? super Object>) ev -> draw());
         this.heightProperty().bind(View.heightObservable);
-        // la couleur est d finie en dur
         Color color = Color.rgb(40, 40, 40);
         if (pieceColor == PieceSquareColor.WHITE) {
             color = Color.rgb(245, 245, 245);
         }
         graphicsContext.setFill(color);
 
-       draw(this.heightProperty());
+       draw();
     }
 
-    private void draw(DoubleProperty evt) {
+    private void draw() {
         double rowWidth = this.getWidth();
         double rowHeight = this.getHeight();
         // System.out.println(rowHeight);
@@ -37,7 +38,13 @@ public class PieceGui extends Canvas {
         double upperLeftHeight = offset / 2;
         // graphicsContext.fillArc(upperLeftWidth, upperLeftHeight, width, height, 30,
         // 300, ArcType.ROUND);
-        getGraphicsContext2D().fillRoundRect(upperLeftWidth, upperLeftHeight, width, height, 30, 300);
+        if(GuiFactory.getGUIConfig().get("Forme") ==  PieceShape.HOMEPOD){
+            getGraphicsContext2D().clearRect(0, 0, this.getWidth(), this.getHeight());
+            getGraphicsContext2D().fillRoundRect(upperLeftWidth, upperLeftHeight, width, height, 30, 300);
+        }else if(GuiFactory.getGUIConfig().get("Forme") ==  PieceShape.CIRCLE){
+            getGraphicsContext2D().clearRect(0, 0, this.getWidth(), this.getHeight());
+            getGraphicsContext2D().fillOval(upperLeftWidth, upperLeftHeight, width, height);
+        }
     }
 
     public void promoteToQueen() {

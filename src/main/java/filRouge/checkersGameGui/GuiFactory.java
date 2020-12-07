@@ -4,20 +4,18 @@ import java.util.Map;
 
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 import javafx.collections.FXCollections;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.MenuBar;
-import javafx.scene.layout.Pane;
+import javafx.collections.ObservableMap;
 
 public class GuiFactory {
 
-	private static Map<Object, Object> gUIConfigMap = FXCollections.observableHashMap();
+	private static ObservableMap<Object, Object> gUIConfigMap = FXCollections.observableHashMap();
 	static {
 		GuiFactory.gUIConfigMap.put(PieceSquareColor.BLACK, GuiConfig.CASEBLACK);
 		GuiFactory.gUIConfigMap.put(PieceSquareColor.WHITE, GuiConfig.CASEWHITE);
 		GuiFactory.gUIConfigMap.put("Forme", GuiConfig.SHAPE);
 	}
 
-	public static Map<Object, Object> getGUIConfig() {
+	public static ObservableMap<Object, Object> getGUIConfig() {
 		return GuiFactory.gUIConfigMap;
 	}
 

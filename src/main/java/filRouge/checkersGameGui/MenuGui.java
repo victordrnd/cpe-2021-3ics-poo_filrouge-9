@@ -1,5 +1,7 @@
 package filRouge.checkersGameGui;
 
+import javax.swing.Action;
+
 import filRouge.checkersGameNutsAndBolts.PieceSquareColor;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -9,6 +11,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.paint.Color;
 import javafx.stage.Window;
 
@@ -20,7 +23,31 @@ public class MenuGui extends MenuBar {
 
         MenuItem whiteSquareColor = new MenuItem("Couleur cases blanches");
         MenuItem blackSquareColor = new MenuItem("Couleur cases noires");
-        MenuItem pieceShape = new MenuItem("Forme des pièces");
+        
+        Menu pieceShape = new Menu("Forme des pièces");
+        
+        RadioMenuItem homepodShape = new RadioMenuItem("Homepod");
+        RadioMenuItem circleShape = new RadioMenuItem("Circle");
+        homepodShape.setSelected(true);
+        
+        homepodShape.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                circleShape.setSelected(false);
+                GuiFactory.getGUIConfig().put("Forme", PieceShape.HOMEPOD);
+            }
+        });
+
+        circleShape.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                homepodShape.setSelected(false);
+                GuiFactory.getGUIConfig().put("Forme", PieceShape.CIRCLE);
+            }
+        });
+
+        pieceShape.getItems().addAll(homepodShape, circleShape);
+
 
         whiteSquareColor.setOnAction(new EventHandler<ActionEvent>() {
             @Override
